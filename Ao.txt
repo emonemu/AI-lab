@@ -1,0 +1,61 @@
+import math
+
+# AND-OR graph structure
+graph = {
+    'A': [['B'], ['C']],     # OR node
+    'B': [['D', 'E']],       # AND node
+    'C': [['F', 'G']],       # AND node
+    'D': [],
+    'E': [],
+    'F': [],
+    'G': []
+}
+
+# Heuristic values
+heuristic = {
+    'A': 10,
+    'B': 6,
+    'C': 4,
+    'D': 0,
+    'E': 0,
+    'F': 0,
+    'G': 0
+}
+
+solution_graph = {}
+
+
+def ao_star(node):
+    print(f"Expanding node: {node}")
+
+    # Goal node
+    if not graph[node]:
+        solution_graph[node] = []
+        return heuristic[node]
+
+    min_cost = math.inf
+    best_children = None
+
+    for children in graph[node]:
+        cost = 0
+        for child in children:
+            cost += ao_star(child)
+
+        if cost < min_cost:
+            min_cost = cost
+            best_children = children
+
+    heuristic[node] = min_cost
+    solution_graph[node] = best_children
+    return heuristic[node]
+
+
+# Run AO*
+start_node = 'A'
+total_cost = ao_star(start_node)
+
+print("\nSolution Graph:")
+for k, v in solution_graph.items():
+    print(f"{k} -> {v}")
+
+print("\nOptimal Cost:", total_cost)
