@@ -1,0 +1,10 @@
+male(rahim).
+male(karim).
+
+female(ayesha).
+female(lima).
+?- male(rahim).
+?- female(X).
+parent(rahim, karim).
+parent(rahim, ayesha).
+parent(lima, karim).
