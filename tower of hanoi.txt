@@ -1,0 +1,24 @@
+Towers of Hanoi Problem Using Prolog
+Prolog Program (Towers of Hanoi)
+hanoi(0, _, _, _) :- !.
+hanoi(N, Source, Target, Auxiliary) :-
+N > 0,
+M is N - 1,
+hanoi(M, Source, Auxiliary,
+Target), write('Move disk '),
+write(N), write(' from '),
+write(Source), write(' to '),
+write(Target), nl, hanoi(M,
+Auxiliary, Target, Source).
+
+Sample Query
+?- hanoi(3, left, right, middle).
+
+Expected Output
+Move disk 1 from left to right
+Move disk 2 from left to middle
+Move disk 1 from right to middle
+Move disk 3 from left to right Move
+disk 1 from middle to left
+Move disk 2 from middle to right
+Move disk 1 from left to right
